@@ -1,55 +1,67 @@
 import express from 'express';
+import handlebars from 'express-handlebars';
+import __dirname from './dirname.js';
+import { Server as HttpServer } from 'http'
+import { Server as IOServer } from 'socket.io'
+
+import { productsRouter, ViewsRouter } from './routes/index.js';
 import { productManager } from './Managers/index.js';
 
+
+
 const app = express();
+const httpServer = new HttpServer(app)
+const io = new IOServer(httpServer)
 
 const PORT = 8080;
 
-app.get('/api/products', async (req, res) => {
-    try {
-        const { limit, skip } = req.query
+console.log(__dirname);
 
-        const allProducts = await productManager.getProducts();
+app.engine("hbs", handlebars.engine({
+    extname: ".hbs",
+    defaultLayout: "main.hbs",
+}));
 
-        if (!limit || limit < 1) {
-            return res.send({ success: true, products: allProducts });
-        }
+app.use(express.static("public"));
 
-        //    const products = allProducts.slice(skip ?? 0, limit + skip)
-        const products = allProducts.slice(0, limit);
+app.set("view engine", "hbs");
+app.set("views", `${__dirname}/views`);
 
-        res.send({ success: true, products: allProducts });
-    } catch (error) {
-        console.log(error)
 
-        res.send({ success: false, error: "ha ocurrido un error" });
-    }
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// app.use((req, res, next) =>{
+//     req.io = io;
+
+//     next()
+// })
+
+app.set('io', io);
+
+app.use('/', ViewsRouter)
+app.use('/api/products', productsRouter)
+
+
+const server = httpServer.listen(PORT, () =>
+    console.log(`Server running on port ${server.address().port}`)
+);
+
+server.on("error", (error) => {
+    console.log(error);
 });
 
-app.get("/api/products/:id", async (req, res) => {
-    try {
-        const { id: paramId } = req.params;
+io.on("connection",async (socket) => {
+    console.log(`New client connected, id: ${socket.id}`)
 
-        const id = Number(paramId)
+    io.sockets.emit('hola', 'HOLA!');
 
-        if (Number.isNaN(id) || id < 0) {
-            return res.send({ success: false, error: "el id debe ser un numero valido" });
-        }
+    const products = await productManager.getProducts()
 
-        const product = await productManager.getProductById(id)
+    io.sockets.emit("products", products );
 
-        if(!product) {
-            return res.send({ success: false, error: "producto no encontrado" });
-        }
-
-        res.send ({success: true, product: product});
-
-    } catch (error) {
-        console.log(error)
-
-        res.send({success: false, error:"ha ocurrido un error"})
-     }
+    socket.on('addProduct', async (product) => {
+      await  productManager.saveProduct(product)
+    })
 });
-
-
-app.listen(PORT, () => console.log('Server running on port ${8080}'));

@@ -1,49 +1,63 @@
-[{
-    "id": 1,
-    "name": "Manga1",    
-    "description": 1,
-   " price": 400,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM1",
-    "stock": 100
-},{ 
-    "id": 2,
-    "name": "Manga2",   
-    "description": 2,
-   " price": 350,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM2",
-    "stock": 75
-},{
-    "id": 3,
-    "name": "Manga3",    
-    "description": 3,
-   " price": 370,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM3",
-    "stock": 50
-},{ 
-    "id": 4,
-    "name": "Manga4",   
-    "description": 4,
-   " price": 400,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM4",
-    "stock": 90
-},{ 
-    "id": 5,
-    "name": "Manga5",   
-    "description": 5,
-   " price": 360,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM5",
-    "stock": 75
-},{ 
-    "id": 6,
-    "name": "Manga6",   
-    "description": 6,
-   " price": 325,
-   " thumbnail": "no hay thumbnail todavia",
-   " code": "CM6",
-    "stock": 44
-}]
+[
+   {
+      "id": 1,
+      "name": "Manga1",
+      "description": 1,
+      " price": 400,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM1",
+      "stock": 100
+   },
+   {
+      "id": 2,
+      "name": "Manga2",
+      "description": 2,
+      " price": 350,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM2",
+      "stock": 75
+   },
+   {
+      "id": 3,
+      "name": "Manga3",
+      "description": 3,
+      " price": 370,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM3",
+      "stock": 50
+   },
+   {
+      "id": 4,
+      "name": "Manga4",
+      "description": 4,
+      " price": 400,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM4",
+      "stock": 90
+   },
+   {
+      "id": 5,
+      "name": "Manga5",
+      "description": 5,
+      " price": 360,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM5",
+      "stock": 75
+   },
+   {
+      "id": 6,
+      "name": "Manga6",
+      "description": 6,
+      " price": 325,
+      " thumbnail": "no hay thumbnail todavia",
+      " code": "CM6",
+      "stock": 44
+   },
+   {
+      "title": "yo",
+      "description": "yo",
+      "price": "6",
+      "code": "marum",
+      "id": 1
+   }
+]
